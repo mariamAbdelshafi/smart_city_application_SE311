@@ -15,7 +15,7 @@ public class Street extends CityComponent{
 
     @Override
     public void display(){
-        System.out.println("        Street: " + name);
+        System.out.println("        ->Street: " + name);
         for (CityComponent a : appartments){
             a.display();
         }

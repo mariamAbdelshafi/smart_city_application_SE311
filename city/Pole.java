@@ -1,13 +1,24 @@
 package city;
 
+import sensors.Sensor;
+import sensors.SensorFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pole extends CityComponent{
+    private List<Sensor> sensors;
     public Pole(String name){
         super(name);
+        this.sensors = new ArrayList<>();
     }
 
     @Override
     public void display(){
-        System.out.println("            Pole: " + name);
+        System.out.println("            ->Pole: " + name);
+        for(Sensor s: sensors){
+            System.out.println("                Sensor: " + s.getClass().getSimpleName());
+        }
     }
 
     @Override
@@ -18,5 +29,9 @@ public class Pole extends CityComponent{
     @Override
     public void remove(CityComponent component){
         throw new UnsupportedOperationException("A pole can't contain another component");
+    }
+
+    public void addSensor(Sensor sensor){
+        sensors.add(sensor);
     }
 }

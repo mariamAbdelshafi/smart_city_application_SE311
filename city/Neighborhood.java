@@ -13,7 +13,7 @@ public class Neighborhood extends CityComponent{
 
     @Override
     public void display(){
-        System.out.println("    Neighborhood: " + name);
+        System.out.println("    ->Neighborhood: " + name);
         for (CityComponent s : streets) {
             s.display();
         }
