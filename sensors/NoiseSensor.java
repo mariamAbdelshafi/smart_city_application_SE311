@@ -2,6 +2,9 @@ package sensors;
 
 public class NoiseSensor extends Sensor{
     private int noise_level;
+    public NoiseSensor(String location) {
+        super(location);
+    }
 
     @Override
     public void display(){

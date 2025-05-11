@@ -2,6 +2,9 @@ package sensors;
 
 public class SpeedSensor extends Sensor{
     private int speed;
+    public SpeedSensor(String location) {
+        super(location);
+    }
 
     @Override
     public void display(){

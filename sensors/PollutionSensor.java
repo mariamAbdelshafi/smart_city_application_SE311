@@ -2,6 +2,9 @@ package sensors;
 
 public class PollutionSensor extends Sensor{
     private int AQI_value;
+    public PollutionSensor(String location) {
+        super(location);
+    }
 
     @Override
     public void display(){
