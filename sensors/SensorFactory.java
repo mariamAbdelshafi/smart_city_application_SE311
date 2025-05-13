@@ -1,7 +1,9 @@
 package sensors;
 
+import city.CityComponent;
+
 public class SensorFactory {
-    public static Sensor createSensor(String type, String location){
+    public static Sensor createSensor(String type, CityComponent location){
         switch (type.toLowerCase()){
             case "temperature":
                 return new TemperatureSensor(location);

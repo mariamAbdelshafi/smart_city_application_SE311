@@ -1,12 +1,15 @@
 package monitoring;
 
 import commands.Command;
+import commands.StatusQueryCommand;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonitoringCenter {
     private static MonitoringCenter instance;
     private final List<Command> commandQueue = new ArrayList<>();
+    int malfunctioningCount = 0;
 
     private MonitoringCenter() {}
 
@@ -22,9 +25,20 @@ public class MonitoringCenter {
     }
 
     public void executeCommands() {
+        int malfunctioningCount = 0; // ← Tu avais oublié cette ligne
+
         for (Command command : commandQueue) {
             command.execute();
+
+            if (command instanceof StatusQueryCommand statusCmd) {
+                if (statusCmd.isMalfunctioning()) {
+                    malfunctioningCount++;
+                }
+            }
         }
+
+        System.out.println("Total malfunctioning sensors: " + malfunctioningCount);
         commandQueue.clear();
     }
+
 }

@@ -1,17 +1,25 @@
 package commands;
 
 import sensors.Sensor;
-import commands.Command;
 
 public class StatusQueryCommand implements Command {
     private final Sensor sensor;
+    private boolean malfunctioning = false;
 
     public StatusQueryCommand(Sensor sensor) {
         this.sensor = sensor;
     }
 
+    @Override
     public void execute() {
-        System.out.println("Sensor at " + sensor.getLocation() +
-                " is malfunctioning: " + sensor.isMalfunctioning());
+        if (sensor.isMalfunctioning()) {
+            malfunctioning = true;
+            String sensorType = sensor.getClass().getSimpleName();
+            System.out.println(sensorType + " at " + sensor.getLocation() + " is malfunctioning");
+        }
+    }
+
+    public boolean isMalfunctioning() {
+        return malfunctioning;
     }
 }
