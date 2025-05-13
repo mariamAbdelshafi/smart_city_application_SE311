@@ -1,7 +1,7 @@
 package city;
 import sensors.Sensor;
 
-
+//component
 public abstract class CityComponent {
     protected String name;
 

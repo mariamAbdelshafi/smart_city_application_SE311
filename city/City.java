@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class City extends CityComponent{
+    //create the city with neighborhoods
     private List<CityComponent> neighborhoods;
 
     public City(String name){

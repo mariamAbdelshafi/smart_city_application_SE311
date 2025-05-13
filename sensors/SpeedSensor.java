@@ -6,6 +6,7 @@ import observer.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
+//concrete subject
 public class SpeedSensor extends Sensor implements Subject {
     private int speed;
     private List<Observer> observers = new ArrayList<>();
@@ -27,14 +28,12 @@ public class SpeedSensor extends Sensor implements Subject {
     @Override
     public void setValue(int value) {
         this.speed = value;
-        //System.out.println("Current speed: " + speed + " km/h");
-
         if (speed < 0 || speed > 300) {
             malfunctioning = true;
         }
-        // Notification si la vitesse est inférieure à 10 km/h
+        //notifies citizens speed<10
         if (speed < 10) {
-            notifyObservers();  // Notifie les observateurs que la vitesse est trop faible
+            notifyObservers();
         }
     }
 

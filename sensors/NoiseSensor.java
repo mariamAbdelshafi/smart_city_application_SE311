@@ -6,6 +6,7 @@ import observer.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
+//concrete subject
 public class NoiseSensor extends Sensor implements Subject {
     private int noise_level;
     private List<Observer> observers = new ArrayList<>();
@@ -26,15 +27,13 @@ public class NoiseSensor extends Sensor implements Subject {
     @Override
     public void setValue(int value){
         this.noise_level = value;
-            //observer notifies citizens noise level is over 85 db
 
         if (noise_level > 200 || noise_level < 0) {
             malfunctioning = true;
         }
-        //System.out.println("Current noise level at the sensor of " + location + ": " + noise_level + "db");
-            // Notification si la température est inférieure à 0°C
+        //notifies citizens noise level is over 85 db
             if (noise_level > 85) {
-                notifyObservers();  // Notifie les observateurs que la température est inférieure à 0°C
+                notifyObservers();
             }
     }
 

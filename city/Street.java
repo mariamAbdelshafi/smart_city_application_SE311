@@ -3,6 +3,7 @@ package city;
 import java.util.ArrayList;
 import java.util.List;
 
+//composite can contain appartments and poles
 public class Street extends CityComponent{
     private List<CityComponent> appartments;
     private List<CityComponent> poles;

@@ -6,6 +6,7 @@ import observer.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
+//concrete subject
 public class TemperatureSensor extends Sensor implements Subject {
     private int temperature;
     private List<Observer> observers = new ArrayList<>();
@@ -27,14 +28,12 @@ public class TemperatureSensor extends Sensor implements Subject {
     @Override
     public void setValue(int value) {
         this.temperature = value;
-        //System.out.println("Current temperature at the sensor of " + location + ": " + temperature + "°C");
-
         if (temperature < -50 || temperature > 60) {
             malfunctioning = true;
         }
-        // Notification si la température est inférieure à 0°C
+        // notifies citizens temperature <0
         if (temperature < 0) {
-            notifyObservers();  // Notifie les observateurs que la température est inférieure à 0°C
+            notifyObservers();
         }
     }
 

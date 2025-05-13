@@ -6,6 +6,7 @@ import observer.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
+//concrete subject
 public class PollutionSensor extends Sensor implements Subject {
     private int pollutionLevel;
     private List<Observer> observers = new ArrayList<>();
@@ -27,11 +28,11 @@ public class PollutionSensor extends Sensor implements Subject {
     @Override
     public void setValue(int value) {
         this.pollutionLevel = value;
-        //System.out.println("Current pollution level: " + pollutionLevel + " µg/m³");
 
         if (pollutionLevel < 0 || pollutionLevel > 500) {
             malfunctioning = true;
         }
+        //notifies citizens aqi>100
         if (pollutionLevel > 100) {
             notifyObservers();
         }

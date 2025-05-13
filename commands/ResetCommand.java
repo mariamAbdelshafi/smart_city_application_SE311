@@ -3,6 +3,7 @@ package commands;
 import sensors.Sensor;
 import commands.Command;
 
+//concrete command
 public class ResetCommand implements Command {
     private final Sensor sensor;
 

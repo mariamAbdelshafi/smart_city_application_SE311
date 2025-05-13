@@ -9,8 +9,8 @@ import monitoring.MonitoringCenter;
 import sensors.SensorHolder;
 
 public class Main {
-    public static void main(String[] args){
-        //create city structure
+    public static void main(String[] args) {
+        //city structure
         CityComponent city = new City("City");
 
         CityComponent neighborhood = new Neighborhood("Neighborhood1");
@@ -39,40 +39,41 @@ public class Main {
         street1.add(pole1);
         street2.add(pole2);
 
-        //create and add sensors
+        //create sensors
         SensorFactory factory = new SensorFactory();
 
-        CityComponent[] components_appart = { appartment1, appartment2, appartment3};
-        CityComponent[] components_pole = {pole1, pole2 };
+        CityComponent[] components_appart = { appartment1, appartment2, appartment3 };
+        CityComponent[] components_pole = { pole1, pole2 };
 
         for (CityComponent component : components_appart) {
-            component.addSensor(factory.createSensor("temperature", appartment1));
-            component.addSensor(factory.createSensor("noise", appartment1));
-            component.addSensor(factory.createSensor("pollution", appartment1));
-            component.addSensor(factory.createSensor("speed", appartment1));
+            component.addSensor(factory.createSensor("temperature", component));
+            component.addSensor(factory.createSensor("noise", component));
+            component.addSensor(factory.createSensor("pollution", component));
+            component.addSensor(factory.createSensor("speed", component));
         }
 
         for (CityComponent component : components_pole) {
-            component.addSensor(factory.createSensor("temperature", pole1));
-            component.addSensor(factory.createSensor("noise", pole1));
-            component.addSensor(factory.createSensor("pollution", pole1));
-            component.addSensor(factory.createSensor("speed", pole1));
+            component.addSensor(factory.createSensor("temperature", component));
+            component.addSensor(factory.createSensor("noise", component));
+            component.addSensor(factory.createSensor("pollution", component));
+            component.addSensor(factory.createSensor("speed", component));
         }
 
         System.out.println("City structure:\n");
-        
         city.display();
-        // juste après avoir créé les capteurs avec factory :
+
         Sensor tempSensor = ((SensorHolder) appartment1).getSensors().get(0);
         Sensor noiseSensor = ((SensorHolder) pole1).getSensors().get(1);
         Sensor pollutionSensor = ((SensorHolder) pole1).getSensors().get(2);
         Sensor speedSensor = ((SensorHolder) pole1).getSensors().get(3);
 
+        //add an observer(citizens) to the sensors -> the citizen subscribes to the sensors
         Citizens citizen = new Citizens("John");
         ((Subject) tempSensor).registerObserver(citizen);
         ((Subject) noiseSensor).registerObserver(citizen);
         ((Subject) pollutionSensor).registerObserver(citizen);
         ((Subject) speedSensor).registerObserver(citizen);
+
 
         tempSensor.setValue(-3);
         noiseSensor.setValue(90);
@@ -80,15 +81,34 @@ public class Main {
         speedSensor.setValue(-5);
 
 
+        Sensor[] sensors = { tempSensor, noiseSensor, pollutionSensor, speedSensor };
+        simulateMonitoring(sensors);
+    }
 
+    //simulate periodic monitoring
+    public static void simulateMonitoring(Sensor[] sensors) {
         MonitoringCenter center = MonitoringCenter.getInstance();
-        center.addCommand(new StatusQueryCommand(tempSensor));
-        center.addCommand(new StatusQueryCommand(noiseSensor));
-        center.addCommand(new StatusQueryCommand(pollutionSensor));
-        center.addCommand(new StatusQueryCommand(speedSensor));
-        center.executeCommands();
 
+        for (int i = 0; i < 2; i++) {
+            System.out.println("\n--- Monitoring cycle " + (i + 1) + " ---");
 
+            for (Sensor s : sensors) {
+                center.addCommand(new StatusQueryCommand(s));
+            }
 
+            center.executeCommands();
+
+            for (Sensor s : sensors) {
+                if (s.isMalfunctioning()) {
+                    new ResetCommand(s).execute();
+                }
+            }
+
+            try {
+                Thread.sleep(5000); //wait 5 seconds between each cycle
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

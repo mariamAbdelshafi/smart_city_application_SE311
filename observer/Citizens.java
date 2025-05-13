@@ -1,5 +1,6 @@
 package observer;
 
+//observer
 public class Citizens implements Observer{
     private String name;
 

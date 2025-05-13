@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MonitoringCenter {
+    //unique instance
     private static MonitoringCenter instance;
     private final List<Command> commandQueue = new ArrayList<>();
-    int malfunctioningCount = 0;
-
     private MonitoringCenter() {}
 
     public static MonitoringCenter getInstance() {
@@ -24,12 +23,14 @@ public class MonitoringCenter {
         commandQueue.add(command);
     }
 
+    //execute all the commands
     public void executeCommands() {
         int malfunctioningCount = 0; // ← Tu avais oublié cette ligne
 
         for (Command command : commandQueue) {
             command.execute();
 
+            //check if a sensor is malfunctioning
             if (command instanceof StatusQueryCommand statusCmd) {
                 if (statusCmd.isMalfunctioning()) {
                     malfunctioningCount++;

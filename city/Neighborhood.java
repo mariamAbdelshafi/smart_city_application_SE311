@@ -3,6 +3,7 @@ package city;
 import java.util.ArrayList;
 import java.util.List;
 
+//composite neighborhood with streets
 public class Neighborhood extends CityComponent{
     private List<CityComponent> streets;
 

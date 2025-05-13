@@ -2,6 +2,8 @@ package commands;
 
 import sensors.Sensor;
 
+//concrete command
+
 public class StatusQueryCommand implements Command {
     private final Sensor sensor;
     private boolean malfunctioning = false;
@@ -10,6 +12,7 @@ public class StatusQueryCommand implements Command {
         this.sensor = sensor;
     }
 
+    //averts if a sensors is malfunctionning
     @Override
     public void execute() {
         if (sensor.isMalfunctioning()) {

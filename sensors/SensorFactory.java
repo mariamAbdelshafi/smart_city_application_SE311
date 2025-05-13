@@ -2,6 +2,7 @@ package sensors;
 
 import city.CityComponent;
 
+//create a sensor according to the type
 public class SensorFactory {
     public static Sensor createSensor(String type, CityComponent location){
         switch (type.toLowerCase()){

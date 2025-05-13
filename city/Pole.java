@@ -1,12 +1,12 @@
 package city;
 
 import sensors.Sensor;
-import sensors.SensorFactory;
 import sensors.SensorHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//leaf
 public class Pole extends CityComponent implements SensorHolder {
     private List<Sensor> sensors;
     public Pole(String name){
@@ -42,11 +42,11 @@ public class Pole extends CityComponent implements SensorHolder {
     }
 
     public String getLocation() {
-        return name; // Retourne le nom de l'appartement
+        return name;
     }
 
     @Override
     public String toString() {
-        return name; // Affiche le nom de l'appartement pour les alertes
+        return name;
     }
 }

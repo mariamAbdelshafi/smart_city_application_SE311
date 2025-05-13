@@ -14,6 +14,7 @@ public class Appartment extends CityComponent implements SensorHolder {
         this.sensors = new ArrayList<>();
     }
 
+    //display the appartment's name and its sensors
     @Override
     public void display(){
         System.out.println("            ->Appartment: " + name);
@@ -36,18 +37,18 @@ public class Appartment extends CityComponent implements SensorHolder {
         sensors.add(sensor);
     }
 
+    //get the sensors of the appart
     @Override
     public List<Sensor> getSensors() {
         return sensors;
     }
 
-    //@Override
     public String getLocation() {
-        return name; // Retourne le nom de l'appartement
+        return name;
     }
 
     @Override
     public String toString() {
-        return name; // Affiche le nom de l'appartement pour les alertes
+        return name;
     }
 }
