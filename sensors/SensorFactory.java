@@ -3,8 +3,8 @@ package sensors;
 import city.CityComponent;
 
 //create a sensor according to the type
-public class SensorFactory {
-    public static Sensor createSensor(String type, CityComponent location){
+public class SensorFactory extends AbstractSensorFactory{
+    public Sensor createSensor(String type, CityComponent location){
         switch (type.toLowerCase()){
             case "temperature":
                 return new TemperatureSensor(location);
